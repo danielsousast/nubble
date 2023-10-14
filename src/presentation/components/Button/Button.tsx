@@ -1,28 +1,37 @@
 import React from 'react';
 import {Text} from '../Text/Text';
-import {TouchableBox, TouchableBoxProps} from '../Box/Box';
-import {ActivityIndicator} from 'react-native';
+import {TouchableBox} from '../Box/Box';
+import {ButtonProps} from './Button.types';
+import ActivityIndicator from '../ActivityIndicator/ActivityIndicator';
+import {buttonPresets} from './ButtonPresets';
 
-export interface ButtonProps extends TouchableBoxProps {
-  title: string;
-  loading?: boolean;
-}
-
-const Button = ({title, loading, ...touchableBoxProps}: ButtonProps) => {
+const Button = ({
+  title,
+  loading,
+  preset = 'primary',
+  disabled,
+  ...touchableBoxProps
+}: ButtonProps) => {
+  const buttonPreset = disabled
+    ? buttonPresets[preset].disabled
+    : buttonPresets[preset].default;
   return (
     <TouchableBox
-      backgroundColor="buttonPrimary"
       height={50}
       alignItems="center"
       justifyContent="center"
       borderRadius="s16"
       paddingHorizontal="s20"
       activeOpacity={0.6}
+      disabled={disabled || loading}
+      {...buttonPreset.container}
       {...touchableBoxProps}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator {...buttonPreset.content} />
       ) : (
-        <Text color="primaryContrast">{title}</Text>
+        <Text bold {...buttonPreset.content} preset="paragraphMedium">
+          {title}
+        </Text>
       )}
     </TouchableBox>
   );
