@@ -1,6 +1,6 @@
 import React from 'react';
 import {ThemeColors} from '@/common/theme/theme';
-import {useAppTheme} from '../useAppTheme';
+import {useAppTheme} from '../../hooks/useAppTheme';
 import {
   ActivityIndicatorProps,
   ActivityIndicator as RNActivityIndicator,

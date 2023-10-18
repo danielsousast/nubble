@@ -26,7 +26,7 @@ import ProfileIcon from '@/common/assets/icons/profile.svg';
 import SearchIcon from '@/common/assets/icons/search.svg';
 import SettingsIcon from '@/common/assets/icons/settings.svg';
 import TrashIcon from '@/common/assets/icons/trash.svg';
-import {useAppTheme} from '../useAppTheme';
+import {useAppTheme} from '../../hooks/useAppTheme';
 import {ThemeColors} from '@/common/theme/theme';
 
 const iconRegistry = {
