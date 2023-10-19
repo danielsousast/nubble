@@ -4,6 +4,7 @@ import Button from '@/presentation/components/Button/Button';
 import {Screen} from '@/presentation/components/Screen/Screen';
 import {Text} from '@/presentation/components/Text/Text';
 import {TextInput} from '@/presentation/components/TextInput/TextInput';
+import {PasswordInput} from '@/presentation/components/PasswordInput/PasswordInput';
 
 export function SignUpScreen() {
   function submitForm() {
@@ -26,14 +27,11 @@ export function SignUpScreen() {
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}
       />
-
-      <TextInput
+      <PasswordInput
         label="Senha"
-        secureTextEntry
         placeholder="Digite sua senha"
         boxProps={{mb: 's48'}}
       />
-
       <Button onPress={submitForm} title="Criar uma conta" />
     </Screen>
   );

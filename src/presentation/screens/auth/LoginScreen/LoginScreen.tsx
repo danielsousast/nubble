@@ -1,6 +1,6 @@
 import {Box} from '@/presentation/components/Box/Box';
 import Button from '@/presentation/components/Button/Button';
-import {Icon} from '@/presentation/components/Icon/Icon';
+import {PasswordInput} from '@/presentation/components/PasswordInput/PasswordInput';
 import {Screen} from '@/presentation/components/Screen/Screen';
 import {Text} from '@/presentation/components/Text/Text';
 import {TextInput} from '@/presentation/components/TextInput/TextInput';
@@ -19,11 +19,7 @@ export function LoginScreen() {
         <TextInput label="E-mail" placeholder="Digite seu e-mail" />
       </Box>
       <Box>
-        <TextInput
-          label="Senha"
-          placeholder="Digite sua senha"
-          RightComponent={<Icon color="gray2" size={22} name="eye-on" />}
-        />
+        <PasswordInput label="Senha" placeholder="Digite sua senha" />
       </Box>
       <Text color="primary" preset="paragraphSmall" bold mt="s10">
         Esqueci minha senha

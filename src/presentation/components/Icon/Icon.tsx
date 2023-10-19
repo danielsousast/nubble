@@ -28,6 +28,7 @@ import SettingsIcon from '@/common/assets/icons/settings.svg';
 import TrashIcon from '@/common/assets/icons/trash.svg';
 import {useAppTheme} from '../../hooks/useAppTheme';
 import {ThemeColors} from '@/common/theme/theme';
+import {Pressable} from 'react-native';
 
 const iconRegistry = {
   ['arrow-left']: ArrowLeftIcon,
@@ -65,10 +66,25 @@ interface Props {
   name: IconName;
   size?: number;
   color?: ThemeColors;
+  onPress?: () => void;
 }
 
-export const Icon = ({size, name, color = 'backgroundContrast'}: Props) => {
+export const Icon = ({
+  size,
+  name,
+  color = 'backgroundContrast',
+  onPress,
+}: Props) => {
   const {colors} = useAppTheme();
   const SVGIcon = iconRegistry[name];
+
+  if (onPress) {
+    return (
+      <Pressable testID={name} hitSlop={10} onPress={onPress}>
+        <SVGIcon width={size} height={size} fill={colors[color]} />
+      </Pressable>
+    );
+  }
+
   return <SVGIcon width={size} height={size} fill={colors[color]} />;
 };
