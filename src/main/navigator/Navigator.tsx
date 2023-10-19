@@ -4,7 +4,12 @@ import {SignUpScreen, LoginScreen} from '@/presentation/screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {Routes} from '@/common/consts/routes';
 
-const Stack = createNativeStackNavigator();
+export type RootParamList = {
+  [Routes.LOGIN]: undefined;
+  [Routes.SIGN_UP]: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootParamList>();
 
 export const Navigator = () => {
   return (

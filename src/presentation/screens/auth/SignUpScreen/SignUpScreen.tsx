@@ -1,12 +1,18 @@
 import React from 'react';
+import {
+  Button,
+  Screen,
+  Text,
+  TextInput,
+  PasswordInput,
+} from '@/presentation/components';
+import {Routes} from '@/common/consts/routes';
+import {RootParamList} from '@/main/navigator/Navigator';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-import {Button} from '@/presentation/components';
-import {Screen} from '@/presentation/components/Screen/Screen';
-import {Text} from '@/presentation/components/Text/Text';
-import {TextInput} from '@/presentation/components/TextInput/TextInput';
-import {PasswordInput} from '@/presentation/components/PasswordInput/PasswordInput';
+type SignUpScreenProps = NativeStackScreenProps<RootParamList, Routes.SIGN_UP>;
 
-export function SignUpScreen() {
+export function SignUpScreen(_props: SignUpScreenProps) {
   function submitForm() {
     // TODO: implementar
   }

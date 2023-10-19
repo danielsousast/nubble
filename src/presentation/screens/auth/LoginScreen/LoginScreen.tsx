@@ -8,8 +8,12 @@ import {
   PasswordInput,
   TextInput,
 } from '@/presentation/components';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootParamList} from '@/main/navigator/Navigator';
 
-export function LoginScreen({navigation}: any) {
+type LoginScreenProps = NativeStackScreenProps<RootParamList, Routes.LOGIN>;
+
+export function LoginScreen({navigation}: LoginScreenProps) {
   function navigateToSignUp() {
     navigation.navigate(Routes.SIGN_UP);
   }
