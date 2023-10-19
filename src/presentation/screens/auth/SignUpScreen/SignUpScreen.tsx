@@ -12,10 +12,18 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type SignUpScreenProps = NativeStackScreenProps<RootParamList, Routes.SIGN_UP>;
 
-export function SignUpScreen(_props: SignUpScreenProps) {
+export function SignUpScreen({navigation}: SignUpScreenProps) {
   function submitForm() {
-    // TODO: implementar
+    navigation.navigate(Routes.SUCCESS, {
+      title: 'Sua conta foi criada com sucesso!',
+      description: 'Agora e só fazer login na nossa plataforma.',
+      icon: {
+        name: 'check-round',
+        color: 'success',
+      },
+    });
   }
+
   return (
     <Screen canGoBack scrollable>
       <Text preset="headingLarge" mb="s32">
