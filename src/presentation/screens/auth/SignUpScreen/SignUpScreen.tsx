@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '@/presentation/components/Button/Button';
+import {Button} from '@/presentation/components';
 import {Screen} from '@/presentation/components/Screen/Screen';
 import {Text} from '@/presentation/components/Text/Text';
 import {TextInput} from '@/presentation/components/TextInput/TextInput';

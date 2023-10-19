@@ -5,7 +5,7 @@ import {ButtonProps} from './Button.types';
 import ActivityIndicator from '../ActivityIndicator/ActivityIndicator';
 import {buttonPresets} from './ButtonPresets';
 
-const Button = ({
+export const Button = ({
   title,
   loading,
   preset = 'primary',
@@ -36,5 +36,3 @@ const Button = ({
     </TouchableBox>
   );
 };
-
-export default Button;

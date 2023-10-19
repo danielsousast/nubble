@@ -1,14 +1,21 @@
-import {Box} from '@/presentation/components/Box/Box';
-import Button from '@/presentation/components/Button/Button';
-import {PasswordInput} from '@/presentation/components/PasswordInput/PasswordInput';
-import {Screen} from '@/presentation/components/Screen/Screen';
-import {Text} from '@/presentation/components/Text/Text';
-import {TextInput} from '@/presentation/components/TextInput/TextInput';
 import React from 'react';
+import {Routes} from '@/common/consts/routes';
+import {
+  Button,
+  Box,
+  Text,
+  Screen,
+  PasswordInput,
+  TextInput,
+} from '@/presentation/components';
 
-export function LoginScreen() {
+export function LoginScreen({navigation}: any) {
+  function navigateToSignUp() {
+    navigation.navigate(Routes.SIGN_UP);
+  }
+
   return (
-    <Screen>
+    <Screen scrollable>
       <Text marginBottom="s8" preset="headingLarge">
         Olá!
       </Text>
@@ -25,7 +32,12 @@ export function LoginScreen() {
         Esqueci minha senha
       </Text>
       <Button marginTop="s48" title="Entrar" />
-      <Button preset="outline" marginTop="s12" title="Criar uma conta" />
+      <Button
+        preset="outline"
+        marginTop="s12"
+        title="Criar uma conta"
+        onPress={navigateToSignUp}
+      />
     </Screen>
   );
 }
