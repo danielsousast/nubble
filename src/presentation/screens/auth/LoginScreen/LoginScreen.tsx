@@ -18,6 +18,10 @@ export function LoginScreen({navigation}: LoginScreenProps) {
     navigation.navigate(Routes.SIGN_UP);
   }
 
+  function navigateToForgotPassword() {
+    navigation.navigate(Routes.FORGOT_PASSWORD);
+  }
+
   return (
     <Screen scrollable>
       <Text marginBottom="s8" preset="headingLarge">
@@ -32,7 +36,12 @@ export function LoginScreen({navigation}: LoginScreenProps) {
       <Box>
         <PasswordInput label="Senha" placeholder="Digite sua senha" />
       </Box>
-      <Text color="primary" preset="paragraphSmall" bold mt="s10">
+      <Text
+        onPress={navigateToForgotPassword}
+        color="primary"
+        preset="paragraphSmall"
+        bold
+        mt="s10">
         Esqueci minha senha
       </Text>
       <Button marginTop="s48" title="Entrar" />

@@ -6,9 +6,12 @@ import React from 'react';
 
 type SuccessScreenProps = NativeStackScreenProps<RootParamList, Routes.SUCCESS>;
 
-export const SuccessScreen = ({route}: SuccessScreenProps) => {
+export const SuccessScreen = ({route, navigation}: SuccessScreenProps) => {
   const {title, description, icon} = route.params;
-  function handleGoBack() {}
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
 
   return (
     <Screen>

@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Routes} from '@/common/consts/routes';
 import SuccessScreen from '@/presentation/screens/auth/SuccessScreen/SuccessScreen';
 import {IconProps} from '@/presentation/components';
+import {ForgotPasswordScreen} from '@/presentation/screens/auth/ForgotPasswordScreen/ForgotPasswordScreen';
 
 export type RootParamList = {
   [Routes.LOGIN]: undefined;
@@ -14,6 +15,7 @@ export type RootParamList = {
     description: string;
     icon: Pick<IconProps, 'name' | 'color'>;
   };
+  [Routes.FORGOT_PASSWORD]: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootParamList>();
@@ -29,6 +31,10 @@ export const Navigator = () => {
         <Stack.Screen name={Routes.LOGIN} component={LoginScreen} />
         <Stack.Screen name={Routes.SIGN_UP} component={SignUpScreen} />
         <Stack.Screen name={Routes.SUCCESS} component={SuccessScreen} />
+        <Stack.Screen
+          name={Routes.FORGOT_PASSWORD}
+          component={ForgotPasswordScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
