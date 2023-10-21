@@ -2,24 +2,37 @@ import React from 'react';
 import {Routes} from '@/common/consts/routes';
 import {
   Button,
-  Box,
   Text,
   Screen,
-  PasswordInput,
-  TextInput,
+  FormPasswordInput,
+  FormTextInput,
 } from '@/presentation/components';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootParamList} from '@/main/navigator/Navigator';
+import {useForm} from 'react-hook-form';
+import {LoginSchemaType, loginSchema} from './loginSchema';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 type LoginScreenProps = NativeStackScreenProps<RootParamList, Routes.LOGIN>;
 
 export function LoginScreen({navigation}: LoginScreenProps) {
+  const {control, handleSubmit} = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   function navigateToSignUp() {
     navigation.navigate(Routes.SIGN_UP);
   }
 
   function navigateToForgotPassword() {
     navigation.navigate(Routes.FORGOT_PASSWORD);
+  }
+
+  function submitForm(data: LoginSchemaType) {
+    console.log(data);
   }
 
   return (
@@ -30,12 +43,20 @@ export function LoginScreen({navigation}: LoginScreenProps) {
       <Text preset="paragraphLarge" mb="s40">
         Digite seu e-mail e senha para entrar
       </Text>
-      <Box mb="s20">
-        <TextInput label="E-mail" placeholder="Digite seu e-mail" />
-      </Box>
-      <Box>
-        <PasswordInput label="Senha" placeholder="Digite sua senha" />
-      </Box>
+      <FormTextInput
+        name="email"
+        label="E-mail"
+        control={control}
+        placeholder="Digite seu e-mail"
+        boxProps={{mb: 's20'}}
+      />
+      <FormPasswordInput
+        control={control}
+        name="password"
+        label="Senha"
+        placeholder="Digite sua senha"
+        boxProps={{mb: 's20'}}
+      />
       <Text
         onPress={navigateToForgotPassword}
         color="primary"
@@ -44,7 +65,11 @@ export function LoginScreen({navigation}: LoginScreenProps) {
         mt="s10">
         Esqueci minha senha
       </Text>
-      <Button marginTop="s48" title="Entrar" />
+      <Button
+        marginTop="s48"
+        title="Entrar"
+        onPress={handleSubmit(submitForm)}
+      />
       <Button
         preset="outline"
         marginTop="s12"

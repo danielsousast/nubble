@@ -6,3 +6,5 @@ export * from './TextInput/TextInput';
 export * from './Icon/Icon';
 export * from './Screen/Screen';
 export * from './Text/Text';
+export * from './Form/FormTextInput';
+export * from './Form/FormPasswordInput';

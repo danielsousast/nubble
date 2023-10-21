@@ -47,6 +47,7 @@ export const TextInput = ({
         <Box {...$containerStyle}>
           <RNTextInput
             ref={inputRef}
+            autoCapitalize="none"
             placeholderTextColor={colors.gray2}
             {...rnTextInputProps}
             style={$inputStyle.input}
