@@ -3,4 +3,6 @@ export enum Routes {
   SIGN_UP = 'SignUp',
   SUCCESS = 'Success',
   FORGOT_PASSWORD = 'ForgotPassword',
+  HOME = 'Home',
+  SETTINGS = 'Settings',
 }

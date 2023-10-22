@@ -1,10 +1,9 @@
 import React from 'react';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useForm} from 'react-hook-form';
 import {LoginSchemaType, loginSchema} from './loginSchema';
-import {Routes} from '@/common/consts/routes';
-import {RootParamList} from '@/main/navigator/Navigator';
+import {AuthScreenProps} from '@/common/@types';
+import {Routes} from '@/main/navigator';
 import {
   Button,
   Text,
@@ -13,9 +12,7 @@ import {
   FormTextInput,
 } from '@/presentation/components';
 
-type LoginScreenProps = NativeStackScreenProps<RootParamList, Routes.LOGIN>;
-
-export function LoginScreen({navigation}: LoginScreenProps) {
+export function LoginScreen({navigation}: AuthScreenProps<Routes.LOGIN>) {
   const {control, handleSubmit} = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
