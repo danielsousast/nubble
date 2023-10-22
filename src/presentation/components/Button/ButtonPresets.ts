@@ -1,4 +1,4 @@
-import {ButtonPresets, ButtonUI} from './Button.types';
+import {ButtonPresets, ButtonUI} from './Buttontypes';
 
 export const buttonPresets: Record<
   ButtonPresets,

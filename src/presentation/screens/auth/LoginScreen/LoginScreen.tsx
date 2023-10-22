@@ -1,5 +1,10 @@
 import React from 'react';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useForm} from 'react-hook-form';
+import {LoginSchemaType, loginSchema} from './loginSchema';
 import {Routes} from '@/common/consts/routes';
+import {RootParamList} from '@/main/navigator/Navigator';
 import {
   Button,
   Text,
@@ -7,11 +12,6 @@ import {
   FormPasswordInput,
   FormTextInput,
 } from '@/presentation/components';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootParamList} from '@/main/navigator/Navigator';
-import {useForm} from 'react-hook-form';
-import {LoginSchemaType, loginSchema} from './loginSchema';
-import {zodResolver} from '@hookform/resolvers/zod';
 
 type LoginScreenProps = NativeStackScreenProps<RootParamList, Routes.LOGIN>;
 

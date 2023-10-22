@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text} from '../Text/Text';
-import {TouchableBox} from '../Box/Box';
-import {ButtonProps} from './Button.types';
 import ActivityIndicator from '../ActivityIndicator/ActivityIndicator';
+import {TouchableBox} from '../Box/Box';
+import {Text} from '../Text/Text';
 import {buttonPresets} from './ButtonPresets';
+import {ButtonProps} from './Buttontypes';
 
 export const Button = ({
   title,
