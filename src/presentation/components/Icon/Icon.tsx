@@ -25,6 +25,7 @@ import {HomeIcon} from './SvgComponents/HomeIcon';
 import {MessageIcon} from './SvgComponents/MessageIcon';
 import {MessageRoundIcon} from './SvgComponents/MessageRoundIcon';
 import {NewPostIcon} from './SvgComponents/NewPostIcon';
+import {ProfileFillIcon} from './SvgComponents/ProfileFillIcon';
 import {ProfileIcon} from './SvgComponents/ProfileIcon';
 import {SearchIcon} from './SvgComponents/SearchIcon';
 import {SettingsIcon} from './SvgComponents/SettingsIcon';
@@ -90,6 +91,7 @@ const iconRegistry = {
   ['message-round']: MessageRoundIcon,
   ['new-post']: NewPostIcon,
   ['profile']: ProfileIcon,
+  ['profile-fill']: ProfileFillIcon,
   ['search']: SearchIcon,
   ['settings']: SettingsIcon,
   ['trash']: TrashIcon,

@@ -5,4 +5,8 @@ export enum Routes {
   FORGOT_PASSWORD = 'ForgotPassword',
   HOME = 'Home',
   SETTINGS = 'Settings',
+  APP_TAB = 'AppTab',
+  NEW_POST = 'NewPost',
+  MY_PROFILE = 'MyProfile',
+  FAVORITE = 'Favorite',
 }
