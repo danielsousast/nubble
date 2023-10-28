@@ -1,6 +1,6 @@
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {mapScreenToProps} from './mapScreenToProps';
+import {mapScreenToProps} from './helpers/mapScreenToProps';
 import {AppTabParamList} from '.';
 import {$shadowProps} from '@/common/theme/theme';
 import {

@@ -1,4 +1,4 @@
-import {AppTabParamList, Routes} from '.';
+import {AppTabParamList, Routes} from '..';
 import {IconProps} from '@/presentation/components';
 
 type IconType = {

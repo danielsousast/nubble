@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {AppTabBar} from './AppTabBar';
-import {Routes} from './routes';
+import {Routes} from './helpers/routes';
 import {
   HomeScreen,
   FavoriteScreen,

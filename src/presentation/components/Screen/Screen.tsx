@@ -1,14 +1,15 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Icon, Text, TouchableBox, Box} from '@/presentation/components';
+import {
+  Icon,
+  Text,
+  TouchableBox,
+  Box,
+  BoxProps,
+} from '@/presentation/components';
 import {useAppSafeArea, useAppTheme} from '@/presentation/hooks';
 
-interface ScreenProps {
-  children: React.ReactNode;
-  canGoBack?: boolean;
-  scrollable?: boolean;
-}
 interface CoontainerProps {
   children: React.ReactNode;
   backgroundColor: string;
@@ -30,10 +31,18 @@ export function ViewContainer({children, backgroundColor}: CoontainerProps) {
   return <View style={{backgroundColor}}>{children}</View>;
 }
 
+interface ScreenProps extends BoxProps {
+  children: React.ReactNode;
+  canGoBack?: boolean;
+  scrollable?: boolean;
+}
+
 export function Screen({
   children,
   canGoBack = false,
   scrollable = false,
+  style,
+  ...boxProps
 }: ScreenProps) {
   const {bottom, top} = useAppSafeArea();
   const {colors} = useAppTheme();
@@ -48,7 +57,8 @@ export function Screen({
         <Box
           paddingBottom="s24"
           paddingHorizontal="s24"
-          style={{paddingTop: top, paddingBottom: bottom}}>
+          style={[{paddingTop: top, paddingBottom: bottom}, style]}
+          {...boxProps}>
           {canGoBack && (
             <TouchableBox mb="s24" flexDirection="row" onPress={goBack}>
               <Icon name="arrow-left" color="primary" size={22} />
