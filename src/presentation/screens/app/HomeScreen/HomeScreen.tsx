@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo, StyleProp, ViewStyle} from 'react-native';
+import {HomeHeader} from './HomeHeader';
 import {AppTabScreenProps} from '@/common/@types';
 import {postService, Post} from '@/domain/post';
 import {Routes} from '@/main/navigator';
@@ -23,6 +24,7 @@ export function HomeScreen(_props: AppTabScreenProps<Routes.HOME>) {
 
   return (
     <Screen style={$screenStyle}>
+      <HomeHeader />
       <FlatList
         data={posts}
         keyExtractor={item => item.id.toString()}
