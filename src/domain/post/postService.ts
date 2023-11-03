@@ -1,9 +1,12 @@
 import {postApi} from './postApi';
-import {Post} from '@/domain/post/postModel';
+import {paginationAdapter, Post, postAdapter, Page} from '@/domain';
 
-async function getList(): Promise<Post[]> {
-  const postList = await postApi.getList();
-  return postList;
+async function getList(page: number): Promise<Page<Post>> {
+  const response = await postApi.getList({page, per_page: 10});
+  return {
+    data: response.data.map(postAdapter.toPost),
+    meta: paginationAdapter.toMetaDataPage(response.meta),
+  };
 }
 
 export const postService = {

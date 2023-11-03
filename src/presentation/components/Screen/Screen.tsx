@@ -28,7 +28,7 @@ export function ScrollViewContainer({
 }
 
 export function ViewContainer({children, backgroundColor}: CoontainerProps) {
-  return <View style={{backgroundColor}}>{children}</View>;
+  return <View style={{flex: 1, backgroundColor}}>{children}</View>;
 }
 
 interface ScreenProps extends BoxProps {
