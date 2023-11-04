@@ -1,5 +1,5 @@
+import {PaginationParams, ResponseAPI} from '@/domain';
 import {PostAPI} from '@/domain/post';
-import {PaginationParams, ResponseAPI} from '@/infra';
 import {httpClient} from '@/infra/httpClient';
 
 async function getList(

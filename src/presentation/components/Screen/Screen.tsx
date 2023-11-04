@@ -1,13 +1,7 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {
-  Icon,
-  Text,
-  TouchableBox,
-  Box,
-  BoxProps,
-} from '@/presentation/components';
+import {ScreenHeader} from './ScreenHeader';
+import {Box, BoxProps} from '@/presentation/components';
 import {useAppSafeArea, useAppTheme} from '@/presentation/hooks';
 
 interface CoontainerProps {
@@ -31,10 +25,11 @@ export function ViewContainer({children, backgroundColor}: CoontainerProps) {
   return <View style={{flex: 1, backgroundColor}}>{children}</View>;
 }
 
-interface ScreenProps extends BoxProps {
+export interface ScreenProps extends BoxProps {
   children: React.ReactNode;
   canGoBack?: boolean;
   scrollable?: boolean;
+  title?: string;
 }
 
 export function Screen({
@@ -42,11 +37,11 @@ export function Screen({
   canGoBack = false,
   scrollable = false,
   style,
+  title,
   ...boxProps
 }: ScreenProps) {
   const {bottom, top} = useAppSafeArea();
   const {colors} = useAppTheme();
-  const {goBack} = useNavigation();
 
   const Container = scrollable ? ScrollViewContainer : ViewContainer;
   return (
@@ -59,14 +54,7 @@ export function Screen({
           paddingHorizontal="s24"
           style={[{paddingTop: top, paddingBottom: bottom}, style]}
           {...boxProps}>
-          {canGoBack && (
-            <TouchableBox mb="s24" flexDirection="row" onPress={goBack}>
-              <Icon name="arrow-left" color="primary" size={22} />
-              <Text preset="paragraphMedium" semiBold ml="s8">
-                Voltar
-              </Text>
-            </TouchableBox>
-          )}
+          <ScreenHeader canGoBack={canGoBack} title={title} />
           {children}
         </Box>
       </Container>

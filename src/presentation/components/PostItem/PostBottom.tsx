@@ -1,11 +1,20 @@
 import React from 'react';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Post} from '@/domain/post';
+import {AppStackParamList, Routes} from '@/main/navigator';
 import {Box, Text} from '@/presentation/components';
 
-type Props = Pick<Post, 'author' | 'text' | 'commentCount'>;
+type Props = Pick<Post, 'author' | 'text' | 'commentCount' | 'id'>;
 
-export function PostBottom({author, text, commentCount}: Props) {
+export function PostBottom({author, text, commentCount, id}: Props) {
+  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
   const commentText = getCommentText(commentCount);
+
+  function navigateToPostComments() {
+    navigation.navigate(Routes.POST_COMMENTS, {
+      postId: id,
+    });
+  }
 
   return (
     <Box mt="s16">
@@ -16,7 +25,12 @@ export function PostBottom({author, text, commentCount}: Props) {
         {text}
       </Text>
       {commentText && (
-        <Text mt="s8" preset="paragraphSmall" bold color="primary">
+        <Text
+          mt="s8"
+          preset="paragraphSmall"
+          bold
+          color="primary"
+          onPress={navigateToPostComments}>
           {commentText}
         </Text>
       )}

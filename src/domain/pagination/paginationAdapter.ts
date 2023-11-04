@@ -1,5 +1,4 @@
-import {MetaDataPage} from './paginationTypes';
-import {MetaDataPageAPI} from '@/infra';
+import {MetaDataPage, MetaDataPageAPI} from './paginationTypes';
 
 function toMetaDataPage(meta: MetaDataPageAPI): MetaDataPage {
   return {

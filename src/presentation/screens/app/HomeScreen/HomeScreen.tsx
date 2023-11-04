@@ -17,7 +17,7 @@ import {Screen, PostItem} from '@/presentation/components';
 export function HomeScreen(_props: AppTabScreenProps<Routes.HOME>) {
   const flatListRef = React.useRef<FlatList<Post>>(null);
   useScrollToTop(flatListRef);
-  const {posts, loading, error, refresh, fetchNextPage} = usePostList();
+  const {list: posts, loading, error, refresh, fetchNextPage} = usePostList();
 
   function renderPost({item}: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />;
