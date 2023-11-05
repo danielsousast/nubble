@@ -1,6 +1,4 @@
-import {Post} from '@/domain/post/postTypes';
-
-export const postListMock: Post[] = [
+export const postListMock: any[] = [
   {
     id: 'post_1',
     text: 'This is my first post!',

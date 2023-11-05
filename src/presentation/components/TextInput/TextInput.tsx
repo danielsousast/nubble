@@ -2,8 +2,8 @@ import React from 'react';
 import {
   TextInputProps as RNTextInputProps,
   TextInput as RNTextInput,
-  StyleSheet,
   Pressable,
+  TextStyle,
 } from 'react-native';
 import {useAppTheme} from '../../hooks/useAppTheme';
 import {Box, BoxProps} from '../Box/Box';
@@ -50,7 +50,7 @@ export const TextInput = ({
             autoCapitalize="none"
             placeholderTextColor={colors.gray2}
             {...rnTextInputProps}
-            style={$inputStyle.input}
+            style={$textInputStyle}
           />
           {RightComponent && (
             <Box justifyContent="center" ml="s16">
@@ -68,12 +68,10 @@ export const TextInput = ({
   );
 };
 
-const $inputStyle = StyleSheet.create({
-  input: {
-    padding: 0,
-    flexGrow: 1,
-    flexShrink: 1,
-    fontFamily: $fontFamily.regular,
-    ...$fontSizes.paragraphMedium,
-  },
-});
+export const $textInputStyle: TextStyle = {
+  padding: 0,
+  flexGrow: 1,
+  flexShrink: 1,
+  fontFamily: $fontFamily.regular,
+  ...$fontSizes.paragraphMedium,
+};

@@ -10,3 +10,5 @@ export * from './Form/FormTextInput';
 export * from './Form/FormPasswordInput';
 export * from './PostItem/PostItem';
 export * from './Brand/SimpleLogo';
+export * from './ProfileAvatar/ProfileAvatar';
+export * from './TextMessage/TextMessage';

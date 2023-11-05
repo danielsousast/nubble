@@ -8,7 +8,7 @@ import {SettingsScreen, PostCommentScreen} from '@/presentation/screens';
 export type AppStackParamList = {
   [Routes.SETTINGS]: undefined;
   [Routes.POST_COMMENTS]: {
-    postId: string;
+    postId: number;
   };
   [Routes.APP_TAB]: NavigatorScreenParams<AppTabParamList>;
 };

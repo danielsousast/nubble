@@ -1,5 +1,5 @@
 import React from 'react';
-import ActivityIndicator from '../ActivityIndicator/ActivityIndicator';
+import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 import {TouchableBox} from '../Box/Box';
 import {Text} from '../Text/Text';
 import {buttonPresets} from './ButtonPresets';
