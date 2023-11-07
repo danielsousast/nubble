@@ -14,9 +14,9 @@ export function PostCommentInput({postId, onAddComment}: Props) {
   });
 
   function onSuccessfulComment() {
-    onAddComment();
     setMessage('');
     Keyboard.dismiss();
+    onAddComment();
   }
 
   async function onPressSend() {

@@ -1,28 +1,18 @@
-import {useState} from 'react';
 import {postCommentService} from '../postCommentService';
 import {PostComment} from '../postCommentTypes';
+import {MutationOptions, useMutation} from '@/domain/shared/useMutation';
 
-interface Options {
-  onSuccess?: (data: PostComment) => void;
-}
-
-export function usePostCommentCreate(postId: number, options?: Options) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<boolean | null>(null);
+export function usePostCommentCreate(
+  postId: number,
+  options?: MutationOptions<PostComment>,
+) {
+  const {loading, error, mutate} = useMutation<string, PostComment>(
+    message => postCommentService.create(postId, message),
+    options,
+  );
 
   async function createComment(message: string) {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await postCommentService.create(postId, message);
-      if (options?.onSuccess) {
-        options.onSuccess(response);
-      }
-    } catch (err) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
+    await mutate(message);
   }
 
   return {

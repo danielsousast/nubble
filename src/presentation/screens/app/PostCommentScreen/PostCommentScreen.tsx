@@ -4,6 +4,7 @@ import {PostCommentInput} from './components/PostCommentInput';
 import {PostCommentItem} from './components/PostCommentItem';
 import {SeeMorePostsButton} from './components/SeeMorePostsButton';
 import {AppScreenProps} from '@/common/@types';
+import {useSignedUser} from '@/domain/auth';
 import {PostComment, usePostCommentList} from '@/domain/postComment';
 import {Routes} from '@/main/navigator';
 import {Box, Screen} from '@/presentation/components';
@@ -14,6 +15,9 @@ export function PostCommentScreen({
 }: AppScreenProps<Routes.POST_COMMENTS>) {
   const {bottom} = useAppSafeArea();
   const postId = route?.params?.postId;
+  const postAuthorId = route.params.postAuthorId;
+  const signedUser = useSignedUser();
+
   const {
     list: postCommentList,
     fetchNextPage,
@@ -22,7 +26,14 @@ export function PostCommentScreen({
   } = usePostCommentList(postId);
 
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
-    return <PostCommentItem postComment={item} />;
+    return (
+      <PostCommentItem
+        postComment={item}
+        onRemoveComment={refreshComments}
+        userId={signedUser?.id}
+        postAuthorId={postAuthorId}
+      />
+    );
   }
 
   return (

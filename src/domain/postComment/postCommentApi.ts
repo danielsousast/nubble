@@ -1,4 +1,9 @@
-import {PaginationParams, ResponseAPI, PostCommentAPI} from '@/domain';
+import {
+  PaginationParams,
+  ResponseAPI,
+  PostCommentAPI,
+  RemoveCommentResponse,
+} from '@/domain';
 import {httpClient} from '@/infra/httpClient';
 
 interface GetPostCommentsParams extends PaginationParams {
@@ -12,12 +17,9 @@ async function getAll(
 ): Promise<ResponseAPI<PostCommentAPI>> {
   // add delay fake
   await new Promise(resolve => setTimeout(resolve, 1000));
-  const reponse = await httpClient.get<ResponseAPI<PostCommentAPI>>(
-    'user/post_comment',
-    {
-      params,
-    },
-  );
+  const reponse = await httpClient.get<ResponseAPI<PostCommentAPI>>(PATH, {
+    params,
+  });
   return reponse.data;
 }
 
@@ -25,18 +27,17 @@ async function create(
   post_id: number,
   message: string,
 ): Promise<PostCommentAPI> {
-  const response = await httpClient.post<PostCommentAPI>('user/post_comment', {
+  const response = await httpClient.post<PostCommentAPI>(PATH, {
     post_id,
     message,
   });
   return response.data;
 }
 
-async function remove(postCommentId: number): Promise<{message: string}> {
-  const response = await httpClient.delete<{message: string}>(
+async function remove(postCommentId: number): Promise<RemoveCommentResponse> {
+  const response = await httpClient.delete<RemoveCommentResponse>(
     `${PATH}/${postCommentId}`,
   );
-
   return response.data;
 }
 

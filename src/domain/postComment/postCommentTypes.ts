@@ -30,3 +30,7 @@ export interface PostCommentAPI {
   };
   meta: any; //{};
 }
+
+export interface RemoveCommentResponse {
+  message: string;
+}

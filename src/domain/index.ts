@@ -1,7 +1,7 @@
 // Note: This file is used to export all domain modules
 // Path: src/domain/pagination
-export * from './pagination/paginationAdapter';
-export * from './pagination/paginationTypes';
+export * from './shared/paginationAdapter';
+export * from './shared/paginationTypes';
 
 // Path: src/domain/post
 export * from './post/postAdapter';

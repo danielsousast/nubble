@@ -9,6 +9,7 @@ export type AppStackParamList = {
   [Routes.SETTINGS]: undefined;
   [Routes.POST_COMMENTS]: {
     postId: number;
+    postAuthorId: number;
   };
   [Routes.APP_TAB]: NavigatorScreenParams<AppTabParamList>;
 };
