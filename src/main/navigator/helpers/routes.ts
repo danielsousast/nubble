@@ -10,4 +10,5 @@ export enum Routes {
   MY_PROFILE = 'MyProfile',
   FAVORITE = 'Favorite',
   POST_COMMENTS = 'PostComments',
+  PROFILE = 'Profile',
 }
