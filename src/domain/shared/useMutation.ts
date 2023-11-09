@@ -14,13 +14,11 @@ export function useMutation<TVariables, TData>(
   const [error, setError] = useState<boolean | null>(null);
 
   async function mutate(variables: TVariables) {
-    console.log('mutate', options);
     try {
       setLoading(true);
       setError(null);
       const response = await mutationFn(variables);
       if (options?.onSuccess) {
-        console.log('onSuccess');
         options.onSuccess(response);
       }
     } catch (err) {

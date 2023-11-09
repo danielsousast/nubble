@@ -6,6 +6,7 @@ import {
   usePostCommentRemove,
 } from '@/domain/postComment';
 import {Box, ProfileAvatar, Text} from '@/presentation/components';
+import {useToastAction} from '@/presentation/hooks/toast/useToast';
 
 interface Props {
   postComment: PostComment;
@@ -24,8 +25,16 @@ export function PostCommentItem({
     userId,
     postAuthorId,
   );
+  const {showToast} = useToastAction();
+  const {mutate} = usePostCommentRemove({onSuccess: onRemove});
 
-  const {mutate} = usePostCommentRemove({onSuccess: onRemoveComment});
+  function onRemove() {
+    onRemoveComment();
+    showToast({
+      message: 'Comentário removido',
+      type: 'success',
+    });
+  }
 
   function confirmRemove() {
     Alert.alert('Deseja excluir o comentário?', 'pressione confirmar', [
