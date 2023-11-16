@@ -6,11 +6,12 @@ import {
   usePostCommentRemove,
 } from '@/domain/postComment';
 import {Box, ProfileAvatar, Text} from '@/presentation/components';
-import {useToastAction} from '@/presentation/hooks/toast/useToast';
+import {useToastAction} from '@/presentation/hooks';
 
 interface Props {
   postComment: PostComment;
   userId: number;
+  postId: number;
   postAuthorId: number;
   onRemoveComment: () => void;
 }
@@ -19,6 +20,7 @@ export function PostCommentItem({
   onRemoveComment,
   userId,
   postAuthorId,
+  postId,
 }: Props) {
   const isAllowToDelete = postCommentService.isAllowToDelete(
     postComment,
@@ -26,7 +28,9 @@ export function PostCommentItem({
     postAuthorId,
   );
   const {showToast} = useToastAction();
-  const {mutate} = usePostCommentRemove({onSuccess: onRemove});
+  const {removePostComment} = usePostCommentRemove(postId, {
+    onSuccess: onRemove,
+  });
 
   function onRemove() {
     onRemoveComment();
@@ -40,7 +44,7 @@ export function PostCommentItem({
     Alert.alert('Deseja excluir o comentário?', 'pressione confirmar', [
       {
         text: 'Confirmar',
-        onPress: () => mutate({postCommentId: postComment.id}),
+        onPress: () => removePostComment({postCommentId: postComment.id}),
       },
       {
         text: 'Cancelar',

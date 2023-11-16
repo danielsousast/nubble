@@ -32,6 +32,7 @@ export function PostCommentScreen({
         onRemoveComment={refreshComments}
         userId={signedUser?.id}
         postAuthorId={postAuthorId}
+        postId={postId}
       />
     );
   }
@@ -51,7 +52,7 @@ export function PostCommentScreen({
             />
           }
         />
-        <PostCommentInput postId={postId} onAddComment={refreshComments} />
+        <PostCommentInput postId={postId} />
       </Box>
     </Screen>
   );

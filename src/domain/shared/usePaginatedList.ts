@@ -1,64 +1,48 @@
 import {useEffect, useState} from 'react';
-import {Response} from '@/domain';
+import {useInfiniteQuery} from '@tanstack/react-query';
+import {Response} from './paginationTypes';
 
+export interface UsePaginatedListResult<TData> {
+  list: TData[];
+  isError: boolean | null;
+  isLoading: boolean;
+  refresh: () => void;
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+}
 export function usePaginatedList<Data>(
-  getListService: (page: number) => Promise<Response<Data>>,
-) {
+  queryKey: readonly unknown[],
+  getList: (page: number) => Promise<Response<Data>>,
+): UsePaginatedListResult<Data> {
   const [list, setList] = useState<Data[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<boolean | null>(null);
-  const [page, setPage] = useState(1);
-  const [hasNextPage, setHasNextPage] = useState(true);
 
-  async function fetchInitialData() {
-    try {
-      setError(null);
-      setLoading(true);
-      const {data, meta} = await getListService(1);
-      setList(data);
+  const query = useInfiniteQuery({
+    queryKey,
+    queryFn: ({pageParam = 1}) => getList(pageParam as number),
+    initialPageParam: 1,
+    getNextPageParam: ({meta}) => {
       if (meta.hasNextPage) {
-        setPage(2);
-      } else {
-        setHasNextPage(false);
+        return meta.currentPage + 1;
       }
-    } catch (er) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function fetchNextPage() {
-    if (loading || !hasNextPage) {
-      return;
-    }
-    try {
-      setLoading(true);
-      const {data, meta} = await getListService(page);
-      setList(prev => [...prev, ...data]);
-      if (meta.hasNextPage) {
-        setPage(prev => prev + 1);
-      } else {
-        setHasNextPage(false);
-      }
-    } catch (er) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
+      return undefined;
+    },
+  });
 
   useEffect(() => {
-    fetchInitialData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (query.data) {
+      const newList = query.data.pages.reduce<Data[]>((prev, current) => {
+        return [...prev, ...current.data];
+      }, []);
+      setList(newList);
+    }
+  }, [query.data]);
 
   return {
     list,
-    error,
-    loading,
-    refresh: fetchInitialData,
-    fetchNextPage,
-    hasNextPage,
+    isError: query.isError,
+    isLoading: query.isLoading,
+    refresh: query.refetch,
+    fetchNextPage: query.fetchNextPage,
+    hasNextPage: !!query.hasNextPage,
   };
 }

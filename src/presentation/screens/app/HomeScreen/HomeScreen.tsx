@@ -17,7 +17,13 @@ import {Screen, PostItem} from '@/presentation/components';
 export function HomeScreen(_props: AppTabScreenProps<Routes.HOME>) {
   const flatListRef = React.useRef<FlatList<Post>>(null);
   useScrollToTop(flatListRef);
-  const {list: posts, loading, error, refresh, fetchNextPage} = usePostList();
+  const {
+    list: posts,
+    isLoading,
+    isError,
+    refresh,
+    fetchNextPage,
+  } = usePostList();
 
   function renderPost({item}: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />;
@@ -38,12 +44,12 @@ export function HomeScreen(_props: AppTabScreenProps<Routes.HOME>) {
           flex: posts?.length === 0 ? 1 : undefined,
         }}
         ListEmptyComponent={
-          <HomeEmpty refetch={refresh} error={error} loading={loading} />
+          <HomeEmpty refetch={refresh} error={isError} loading={isLoading} />
         }
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={refresh} />
+          <RefreshControl refreshing={isLoading} onRefresh={refresh} />
         }
-        refreshing={loading}
+        refreshing={isLoading}
       />
     </Screen>
   );

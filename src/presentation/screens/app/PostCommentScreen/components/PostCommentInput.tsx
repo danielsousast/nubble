@@ -5,9 +5,8 @@ import {TextMessage} from '@/presentation/components';
 
 interface Props {
   postId: number;
-  onAddComment: () => void;
 }
-export function PostCommentInput({postId, onAddComment}: Props) {
+export function PostCommentInput({postId}: Props) {
   const [message, setMessage] = useState('');
   const {createComment} = usePostCommentCreate(postId, {
     onSuccess: onSuccessfulComment,
@@ -16,7 +15,6 @@ export function PostCommentInput({postId, onAddComment}: Props) {
   function onSuccessfulComment() {
     setMessage('');
     Keyboard.dismiss();
-    onAddComment();
   }
 
   async function onPressSend() {
