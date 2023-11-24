@@ -4,7 +4,7 @@ import {AppStack} from './AppStack';
 import {AuthStack} from './AuthStack';
 
 export const Navigator = () => {
-  const isSignedIn = true;
+  const isSignedIn = false;
   return (
     <NavigationContainer>
       {isSignedIn ? <AppStack /> : <AuthStack />}
