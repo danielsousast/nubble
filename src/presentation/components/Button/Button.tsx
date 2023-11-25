@@ -7,7 +7,7 @@ import {ButtonProps} from './Buttontypes';
 
 export const Button = ({
   title,
-  loading,
+  isLoading,
   preset = 'primary',
   disabled,
   ...touchableBoxProps
@@ -23,10 +23,10 @@ export const Button = ({
       borderRadius="s16"
       paddingHorizontal="s20"
       activeOpacity={0.6}
-      disabled={disabled || loading}
+      disabled={disabled || isLoading}
       {...buttonPreset.container}
       {...touchableBoxProps}>
-      {loading ? (
+      {isLoading ? (
         <ActivityIndicator {...buttonPreset.content} />
       ) : (
         <Text bold {...buttonPreset.content} preset="paragraphMedium">

@@ -12,6 +12,6 @@ export interface ButtonUI {
 
 export interface ButtonProps extends TouchableBoxProps {
   title: string;
-  loading?: boolean;
+  isLoading?: boolean;
   preset?: ButtonPresets;
 }

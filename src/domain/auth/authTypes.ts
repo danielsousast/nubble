@@ -18,3 +18,10 @@ export interface SignInData {
   email?: string;
   password: string;
 }
+
+export interface AuthCredentialsService {
+  authCredentials: AuthCredentials | null;
+  saveCredentials: (ac: AuthCredentials) => Promise<void>;
+  removeCredentials: () => Promise<void>;
+  isLoading: boolean;
+}

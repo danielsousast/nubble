@@ -1,6 +1,7 @@
 import {authAdapter} from './authAdapter';
 import {authApi} from './authApi';
 import {AuthCredentials} from './authTypes';
+import {httpClient} from '@/infra/httpClient';
 
 async function signIn(
   email: string,
@@ -19,7 +20,17 @@ async function signOut(): Promise<string> {
   return message;
 }
 
+function updateToken(token: string) {
+  httpClient.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
+
+function removeToken() {
+  httpClient.defaults.headers.common.Authorization = null;
+}
+
 export const authService = {
   signIn,
   signOut,
+  updateToken,
+  removeToken,
 };

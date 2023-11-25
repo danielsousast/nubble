@@ -1,5 +1,4 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Routes} from '@/main/navigator';
 import {IconProps} from '@/presentation/components';
@@ -25,20 +24,18 @@ const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 export const AuthStack = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          fullScreenGestureEnabled: true,
-        }}>
-        <Stack.Screen name={Routes.LOGIN} component={LoginScreen} />
-        <Stack.Screen name={Routes.SIGN_UP} component={SignUpScreen} />
-        <Stack.Screen name={Routes.SUCCESS} component={SuccessScreen} />
-        <Stack.Screen
-          name={Routes.FORGOT_PASSWORD}
-          component={ForgotPasswordScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        fullScreenGestureEnabled: true,
+      }}>
+      <Stack.Screen name={Routes.LOGIN} component={LoginScreen} />
+      <Stack.Screen name={Routes.SIGN_UP} component={SignUpScreen} />
+      <Stack.Screen name={Routes.SUCCESS} component={SuccessScreen} />
+      <Stack.Screen
+        name={Routes.FORGOT_PASSWORD}
+        component={ForgotPasswordScreen}
+      />
+    </Stack.Navigator>
   );
 };

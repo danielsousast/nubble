@@ -2,12 +2,13 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppStack} from './AppStack';
 import {AuthStack} from './AuthStack';
+import {useAuthCredentials} from '@/domain/auth';
 
 export const Navigator = () => {
-  const isSignedIn = false;
+  const {authCredentials} = useAuthCredentials();
   return (
     <NavigationContainer>
-      {isSignedIn ? <AppStack /> : <AuthStack />}
+      {authCredentials ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
