@@ -4,7 +4,7 @@ import {
   PostCommentAPI,
   RemoveCommentResponse,
 } from '@/domain';
-import {httpClient} from '@/infra/httpClient';
+import {httpClient} from '@/infra/http/httpClient';
 
 interface GetPostCommentsParams extends PaginationParams {
   post_id: number;

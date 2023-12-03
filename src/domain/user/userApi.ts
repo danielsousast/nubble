@@ -1,5 +1,5 @@
 import {UserAPI} from './userTypes';
-import {httpClient} from '@/infra/httpClient';
+import {httpClient} from '@/infra/http/httpClient';
 
 const PATH = 'users';
 

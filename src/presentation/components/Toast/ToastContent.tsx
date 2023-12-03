@@ -4,7 +4,7 @@ import {Box, BoxProps} from '../Box/Box';
 import {Icon, IconProps} from '../Icon/Icon';
 import {Text} from '../Text/Text';
 import {$shadowProps} from '@/common/theme/theme';
-import {ToastType, ToastMode} from '@/presentation/hooks';
+import {ToastMode, ToastType} from '@/presentation/providers/toast/toastTypes';
 
 const MAX_WIDTH = Dimensions.get('screen').width * 0.9;
 

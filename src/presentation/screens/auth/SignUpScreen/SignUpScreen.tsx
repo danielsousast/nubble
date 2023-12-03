@@ -2,7 +2,9 @@ import React from 'react';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {SignUpSchemaType, signUpSchema} from './signUpSchema';
+import {useAsyncValidation} from './useAsyncValidation';
 import {AuthScreenProps} from '@/common/@types';
+import {useAuthSignUp} from '@/domain/auth';
 import {Routes} from '@/main/navigator';
 import {
   Button,
@@ -10,17 +12,28 @@ import {
   Text,
   FormPasswordInput,
   FormTextInput,
+  ActivityIndicator,
 } from '@/presentation/components';
 import {useResetNavigationSuccess} from '@/presentation/hooks';
 
 export function SignUpScreen(_props: AuthScreenProps<Routes.SIGN_UP>) {
-  const {control, handleSubmit} = useForm<SignUpSchemaType>({
+  const {control, handleSubmit, getFieldState} = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema),
   });
   const {reset} = useResetNavigationSuccess();
+  const {usernameValidation, emailValidation} = useAsyncValidation({
+    getFieldState,
+    control,
+  });
+  const {signUp, isLoading} = useAuthSignUp({
+    onSuccess: onSuccessfulSignUp,
+  });
 
-  function submitForm(_data: SignUpSchemaType) {
-    console.log(_data);
+  function submitForm(data: SignUpSchemaType) {
+    signUp(data);
+  }
+
+  function onSuccessfulSignUp() {
     reset({
       title: 'Sua conta foi criada com sucesso!',
       description: 'Agora e só fazer login na nossa plataforma.',
@@ -42,13 +55,27 @@ export function SignUpScreen(_props: AuthScreenProps<Routes.SIGN_UP>) {
         control={control}
         placeholder="@"
         boxProps={{mb: 's20'}}
+        errorMessage={usernameValidation.errorMessage}
+        RightComponent={
+          usernameValidation.isFetching ? (
+            <ActivityIndicator size="small" />
+          ) : undefined
+        }
       />
       <FormTextInput
-        label="Nome Completo"
+        label="Nome"
         autoCapitalize="words"
-        name="fullName"
+        name="firstName"
         control={control}
-        placeholder="Digite seu nome completo"
+        placeholder="Digite seu nome"
+        boxProps={{mb: 's20'}}
+      />
+      <FormTextInput
+        label="Sobrenome"
+        autoCapitalize="words"
+        name="lastName"
+        control={control}
+        placeholder="Digite seu sobrenome"
         boxProps={{mb: 's20'}}
       />
       <FormTextInput
@@ -57,6 +84,12 @@ export function SignUpScreen(_props: AuthScreenProps<Routes.SIGN_UP>) {
         control={control}
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}
+        errorMessage={emailValidation.errorMessage}
+        RightComponent={
+          emailValidation.isFetching ? (
+            <ActivityIndicator size="small" />
+          ) : undefined
+        }
       />
       <FormPasswordInput
         label="Senha"
@@ -65,7 +98,11 @@ export function SignUpScreen(_props: AuthScreenProps<Routes.SIGN_UP>) {
         placeholder="Digite sua senha"
         boxProps={{mb: 's48'}}
       />
-      <Button onPress={handleSubmit(submitForm)} title="Criar uma conta" />
+      <Button
+        isLoading={isLoading}
+        onPress={handleSubmit(submitForm)}
+        title="Criar uma conta"
+      />
     </Screen>
   );
 }

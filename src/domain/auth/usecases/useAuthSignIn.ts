@@ -1,8 +1,8 @@
 import {useMutation} from '@tanstack/react-query';
 import {authService} from '../authService';
 import {AuthCredentials} from '../authTypes';
-import {useAuthCredentials} from './useAuthCredentials';
 import {MutationOptions} from '@/domain/shared/useMutation';
+import {useAuthCredentials} from '@/presentation/providers/auth/useAuthCredentials';
 
 interface Variables {
   email: string;

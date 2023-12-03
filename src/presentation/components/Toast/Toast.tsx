@@ -1,7 +1,7 @@
 import React, {useCallback, useRef} from 'react';
 import {Animated} from 'react-native';
 import {ToastContent} from './ToastContent';
-import {useToast, useToastAction} from '@/presentation/hooks';
+import {useToast, useToastAction} from '@/presentation/providers';
 
 const DEFAULT_DURATION = 3000;
 

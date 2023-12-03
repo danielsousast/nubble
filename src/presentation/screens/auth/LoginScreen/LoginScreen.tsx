@@ -12,7 +12,7 @@ import {
   FormPasswordInput,
   FormTextInput,
 } from '@/presentation/components';
-import {useToastAction} from '@/presentation/hooks';
+import {useToastAction} from '@/presentation/providers';
 
 export function LoginScreen({navigation}: AuthScreenProps<Routes.LOGIN>) {
   const {showToast} = useToastAction();

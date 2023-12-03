@@ -1,7 +1,7 @@
 import {authAdapter} from './authAdapter';
 import {authApi} from './authApi';
-import {AuthCredentials} from './authTypes';
-import {httpClient} from '@/infra/httpClient';
+import {AuthCredentials, SignUpData} from './authTypes';
+import {httpClient} from '@/infra/http/httpClient';
 
 async function signIn(
   email: string,
@@ -28,9 +28,31 @@ function removeToken() {
   httpClient.defaults.headers.common.Authorization = null;
 }
 
+async function signUp(signUpData: SignUpData): Promise<void> {
+  await authApi.signUp(signUpData);
+}
+
+async function isUserNameAvailable(username: string): Promise<boolean> {
+  const {isAvailable} = await authApi.isUserNameAvailable({username});
+  return isAvailable;
+}
+async function isEmailAvailable(email: string): Promise<boolean> {
+  const {isAvailable} = await authApi.isEmailAvailable({email});
+  return isAvailable;
+}
+
+async function requestNewPassword(email: string): Promise<string> {
+  const {message} = await authApi.forgotPassword({email});
+  return message;
+}
+
 export const authService = {
   signIn,
   signOut,
   updateToken,
   removeToken,
+  signUp,
+  isUserNameAvailable,
+  isEmailAvailable,
+  requestNewPassword,
 };

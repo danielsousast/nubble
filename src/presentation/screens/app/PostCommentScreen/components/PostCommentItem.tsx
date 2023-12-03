@@ -6,7 +6,7 @@ import {
   usePostCommentRemove,
 } from '@/domain/postComment';
 import {Box, ProfileAvatar, Text} from '@/presentation/components';
-import {useToastAction} from '@/presentation/hooks';
+import {useToastAction} from '@/presentation/providers';
 
 interface Props {
   postComment: PostComment;

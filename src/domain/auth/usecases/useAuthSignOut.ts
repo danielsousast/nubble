@@ -1,6 +1,6 @@
 import {useMutation} from '@tanstack/react-query';
 import {authService} from '../authService';
-import {useAuthCredentials} from './useAuthCredentials';
+import {useAuthCredentials} from '@/presentation/providers/';
 
 export function useAuthSignOut() {
   const {removeCredentials} = useAuthCredentials();
