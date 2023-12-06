@@ -11,7 +11,7 @@ async function signIn(
   email: string,
   password: string,
 ): Promise<AuthCredentialsAPI> {
-  const response = await httpClient.post<AuthCredentialsAPI>('login', {
+  const response = await httpClient.post<AuthCredentialsAPI>('auth/login', {
     email,
     password,
   });
@@ -19,12 +19,12 @@ async function signIn(
 }
 
 async function signOut(): Promise<string> {
-  const response = await httpClient.get<string>('profile/logout');
+  const response = await httpClient.get<string>('auth/profile/logout');
   return response.data;
 }
 
 async function signUp(data: SignUpDataAPI): Promise<UserAPI> {
-  const response = await httpClient.post<UserAPI>('register', data);
+  const response = await httpClient.post<UserAPI>('auth/register', data);
   return response.data;
 }
 
@@ -32,7 +32,7 @@ async function isUserNameAvailable(params: {
   username: string;
 }): Promise<FieldIsAvailableAPI> {
   const response = await httpClient.get<FieldIsAvailableAPI>(
-    'validate-username',
+    'auth/validate-username',
     {
       params,
     },
@@ -44,9 +44,12 @@ async function isUserNameAvailable(params: {
 async function isEmailAvailable(params: {
   email: string;
 }): Promise<FieldIsAvailableAPI> {
-  const response = await httpClient.get<FieldIsAvailableAPI>('validate-email', {
-    params,
-  });
+  const response = await httpClient.get<FieldIsAvailableAPI>(
+    'auth/validate-email',
+    {
+      params,
+    },
+  );
 
   return response.data;
 }
@@ -55,7 +58,7 @@ async function forgotPassword(
   params: ForgotPasswordParam,
 ): Promise<{message: string}> {
   const response = await httpClient.post<{message: string}>(
-    'forgot-password',
+    'auth/forgot-password',
     params,
   );
 
