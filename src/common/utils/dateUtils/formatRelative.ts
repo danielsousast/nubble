@@ -2,9 +2,13 @@ import {parseISO, differenceInSeconds, format} from 'date-fns';
 
 export function formatDateRelative(dateISO: string): string {
   const date = parseISO(dateISO);
-  const now = new Date();
+  const now = Date.now();
 
   const diffInSeconds = differenceInSeconds(now, date);
+  if (diffInSeconds < 0) {
+    return format(date, 'dd/MM/yyyy');
+  }
+
   if (diffInSeconds < 60) {
     return `${diffInSeconds} s`;
   }

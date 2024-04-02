@@ -14,11 +14,9 @@
 
 <br>
 
-<!--
 <p align="center">
-  <img alt="Go Marvel" src="./.github/GoMarvel.png" width="100%">
+  <img alt="Go Marvel" src="./github/screens.png" width="100%">
 </p>
--->
 
 ## :rocket: Tecnologias
 
