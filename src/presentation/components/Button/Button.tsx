@@ -27,7 +27,7 @@ export const Button = ({
       {...buttonPreset.container}
       {...touchableBoxProps}>
       {isLoading ? (
-        <ActivityIndicator {...buttonPreset.content} />
+        <ActivityIndicator {...buttonPreset.content} testID="loading" />
       ) : (
         <Text bold {...buttonPreset.content} preset="paragraphMedium">
           {title}
