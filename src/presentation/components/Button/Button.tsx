@@ -23,6 +23,7 @@ export const Button = ({
       borderRadius="s16"
       paddingHorizontal="s20"
       activeOpacity={0.6}
+      testID="button"
       disabled={disabled || isLoading}
       {...buttonPreset.container}
       {...touchableBoxProps}>

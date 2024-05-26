@@ -8,6 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
+    "test:w": "jest --watch",
+    "test:c": "jest --coverage",
     "prepare": "husky install"
   },
   "dependencies": {
