@@ -1,4 +1,4 @@
-import {AppTabParamList, Routes} from '..';
+import {AppTabParamList} from '..';
 import {IconProps} from '@/presentation/components';
 
 type IconType = {
@@ -15,28 +15,28 @@ type MappedScreenProps = Record<
 >;
 
 export const mapScreenToProps: MappedScreenProps = {
-  [Routes.HOME]: {
+  Home: {
     label: 'Início',
     icon: {
       focused: 'home-fill',
       unfocused: 'home',
     },
   },
-  [Routes.NEW_POST]: {
+  NewPost: {
     label: 'Novo post',
     icon: {
       focused: 'new-post',
       unfocused: 'new-post',
     },
   },
-  [Routes.FAVORITE]: {
+  Favorite: {
     label: 'Favorito',
     icon: {
       focused: 'bookmark-fill',
       unfocused: 'bookmark',
     },
   },
-  [Routes.MY_PROFILE]: {
+  MyProfile: {
     label: 'Meu perfil',
     icon: {
       focused: 'profile-fill',

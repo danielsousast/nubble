@@ -19,6 +19,7 @@ export function PasswordInput(props: PasswordInputProps) {
           onPress={toggleSecureTextEntry}
           color="gray2"
           size={22}
+          testID="input-icon"
           name={isSecureTextEntry ? 'eye-on' : 'eye-off'}
         />
       }

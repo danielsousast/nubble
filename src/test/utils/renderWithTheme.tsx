@@ -1,5 +1,6 @@
 import {ReactNode} from 'react';
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import {ThemeProvider} from '@shopify/restyle';
 import {
   RenderOptions,
@@ -13,7 +14,9 @@ export function renderWithTheme(
   options?: RenderOptions,
 ): RenderResult {
   return render(
-    <ThemeProvider theme={theme}>{children}</ThemeProvider>,
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>{children}</NavigationContainer>
+    </ThemeProvider>,
     options,
   );
 }

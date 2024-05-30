@@ -41,7 +41,7 @@ export const TextInput = ({
   return (
     <Pressable onPress={handleFocus}>
       <Box {...boxProps}>
-        <Text preset="paragraphMedium" mb="s4">
+        <Text preset="paragraphMedium" mb="s4" testID="input-label">
           {label}
         </Text>
         <Box {...$containerStyle}>
