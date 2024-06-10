@@ -2,7 +2,7 @@ import {useMutation} from '@tanstack/react-query';
 import {authService} from '../authService';
 import {AuthCredentials} from '../authTypes';
 import {MutationOptions} from '@/domain/shared/useMutation';
-import {useAuthCredentials} from '@/presentation/providers/auth/useAuthCredentials';
+import {useAuthCredentials} from '@/presentation/providers';
 
 interface Variables {
   email: string;
@@ -22,11 +22,16 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
     onSuccess: authCredentials => {
       authService.updateToken(authCredentials.token);
       saveCredentials(authCredentials);
+      if (options?.onSuccess) {
+        options.onSuccess(authCredentials);
+      }
     },
   });
 
   return {
     isLoading: mutation.isPending,
+    isSuccess: mutation.isSuccess,
+    isError: mutation.isError,
     signIn: (variables: Variables) => mutation.mutate(variables),
   };
 }
