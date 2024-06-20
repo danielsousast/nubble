@@ -10,16 +10,17 @@ interface GetPostCommentsParams extends PaginationParams {
   post_id: number;
 }
 
-const PATH = 'user/post_comment';
+export const POST_COMMNET_PATH = 'user/post_comment';
 
 async function getAll(
   params: GetPostCommentsParams,
 ): Promise<ResponseAPI<PostCommentAPI>> {
-  // add delay fake
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  const reponse = await httpClient.get<ResponseAPI<PostCommentAPI>>(PATH, {
-    params,
-  });
+  const reponse = await httpClient.get<ResponseAPI<PostCommentAPI>>(
+    POST_COMMNET_PATH,
+    {
+      params,
+    },
+  );
   return reponse.data;
 }
 
@@ -27,7 +28,7 @@ async function create(
   post_id: number,
   message: string,
 ): Promise<PostCommentAPI> {
-  const response = await httpClient.post<PostCommentAPI>(PATH, {
+  const response = await httpClient.post<PostCommentAPI>(POST_COMMNET_PATH, {
     post_id,
     message,
   });
@@ -36,7 +37,7 @@ async function create(
 
 async function remove(postCommentId: number): Promise<RemoveCommentResponse> {
   const response = await httpClient.delete<RemoveCommentResponse>(
-    `${PATH}/${postCommentId}`,
+    `${POST_COMMNET_PATH}/${postCommentId}`,
   );
   return response.data;
 }

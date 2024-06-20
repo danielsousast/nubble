@@ -8,6 +8,7 @@ import {registerInterceptor} from '@/infra';
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
   authCredentials: null,
   isLoading: true,
+  user: undefined,
   saveCredentials: async () => {},
   removeCredentials: async () => {},
 });
@@ -60,7 +61,13 @@ export function AuthCredentialsProvider({
 
   return (
     <AuthCredentialsContext.Provider
-      value={{authCredentials, isLoading, saveCredentials, removeCredentials}}>
+      value={{
+        authCredentials,
+        isLoading,
+        saveCredentials,
+        removeCredentials,
+        user: authCredentials?.user,
+      }}>
       {children}
     </AuthCredentialsContext.Provider>
   );

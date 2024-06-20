@@ -16,33 +16,34 @@ export function usePaginatedList<Data>(
 ): UsePaginatedListResult<Data> {
   const [list, setList] = useState<Data[]>([]);
 
-  const query = useInfiniteQuery({
-    queryKey,
-    queryFn: ({pageParam = 1}) => getList(pageParam as number),
-    initialPageParam: 1,
-    getNextPageParam: ({meta}) => {
-      if (meta.hasNextPage) {
-        return meta.currentPage + 1;
-      }
-      return undefined;
-    },
-  });
+  const {data, isError, isLoading, refetch, fetchNextPage, hasNextPage} =
+    useInfiniteQuery({
+      queryKey,
+      queryFn: async ({pageParam = 1}) => await getList(pageParam as number),
+      initialPageParam: 1,
+      getNextPageParam: ({meta}) => {
+        if (meta.hasNextPage) {
+          return meta.currentPage + 1;
+        }
+        return undefined;
+      },
+    });
 
   useEffect(() => {
-    if (query.data) {
-      const newList = query.data.pages.reduce<Data[]>((prev, current) => {
+    if (data) {
+      const newList = data.pages.reduce<Data[]>((prev, current) => {
         return [...prev, ...current.data];
       }, []);
       setList(newList);
     }
-  }, [query.data]);
+  }, [data]);
 
   return {
     list,
-    isError: query.isError,
-    isLoading: query.isLoading,
-    refresh: query.refetch,
-    fetchNextPage: query.fetchNextPage,
-    hasNextPage: !!query.hasNextPage,
+    isError: isError,
+    isLoading: isLoading,
+    refresh: refetch,
+    fetchNextPage: fetchNextPage,
+    hasNextPage: !!hasNextPage,
   };
 }

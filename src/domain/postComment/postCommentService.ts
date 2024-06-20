@@ -15,6 +15,7 @@ async function getList(
     per_page: 10,
     post_id,
   });
+
   return {
     data: response.data.map(postCommentAdapter.toPostComment),
     meta: paginationAdapter.toMetaDataPage(response.meta),
