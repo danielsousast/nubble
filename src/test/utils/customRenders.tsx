@@ -11,6 +11,8 @@ import {
   renderHook,
 } from '@testing-library/react-native';
 import {theme} from '@/common/theme/theme';
+import {Toast} from '@/presentation/components';
+import {AuthCredentialsProvider} from '@/presentation/providers';
 
 export function reactQueryWrapper() {
   const queryClient = new QueryClient({
@@ -67,11 +69,14 @@ function wrapAllProviders() {
     },
   });
   return ({children}: {children: ReactNode}) => (
-    <AppThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>{children}</NavigationContainer>
-      </QueryClientProvider>
-    </AppThemeProvider>
+    <AuthCredentialsProvider>
+      <AppThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer>{children}</NavigationContainer>
+          <Toast />
+        </QueryClientProvider>
+      </AppThemeProvider>
+    </AuthCredentialsProvider>
   );
 }
 
