@@ -10,9 +10,10 @@ import {Box, BoxProps} from '../Box/Box';
 import {$fontFamily, $fontSizes, Text} from '../Text/Text';
 
 export interface TextInputProps extends RNTextInputProps {
-  label: string;
+  label?: string;
   errorMessage?: string;
   RightComponent?: React.ReactElement;
+  LeftComponent?: React.ReactElement;
   boxProps?: BoxProps;
 }
 
@@ -20,6 +21,7 @@ export const TextInput = ({
   label,
   errorMessage,
   RightComponent,
+  LeftComponent,
   boxProps,
   ...rnTextInputProps
 }: TextInputProps) => {
@@ -40,11 +42,18 @@ export const TextInput = ({
 
   return (
     <Pressable onPress={handleFocus}>
-      <Box {...boxProps}>
-        <Text preset="paragraphMedium" mb="s4" testID="input-label">
-          {label}
-        </Text>
+      <Box {...boxProps} flexGrow={1} flexShrink={1}>
+        {!!label && (
+          <Text preset="paragraphMedium" mb="s4" testID="input-label">
+            {label}
+          </Text>
+        )}
         <Box {...$containerStyle}>
+          {LeftComponent && (
+            <Box justifyContent="center" mr="s16">
+              {LeftComponent}
+            </Box>
+          )}
           <RNTextInput
             ref={inputRef}
             autoCapitalize="none"

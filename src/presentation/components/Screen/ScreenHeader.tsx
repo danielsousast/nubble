@@ -5,9 +5,10 @@ import {Box, Icon, Text, TouchableBox} from '@/presentation/components';
 interface Props {
   title?: string;
   canGoBack?: boolean;
+  HeaderComponent?: React.ReactNode;
 }
 
-export function ScreenHeader({canGoBack, title}: Props) {
+export function ScreenHeader({canGoBack, title, HeaderComponent}: Props) {
   const navigation = useNavigation();
 
   return (
@@ -26,14 +27,15 @@ export function ScreenHeader({canGoBack, title}: Props) {
           }}
           onPress={navigation.goBack}>
           <Icon size={20} name="arrow-left" color="primary" />
-          {!title && (
+          {!title && !HeaderComponent && (
             <Text preset="paragraphMedium" semiBold ml="s8">
               Voltar
             </Text>
           )}
+          {HeaderComponent && HeaderComponent}
         </TouchableBox>
       )}
-      {title && <Text preset="headingSmall">{title}</Text>}
+      {title && !HeaderComponent && <Text preset="headingSmall">{title}</Text>}
     </Box>
   );
 }

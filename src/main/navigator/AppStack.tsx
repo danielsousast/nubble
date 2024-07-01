@@ -7,6 +7,7 @@ import {
   SettingsScreen,
   PostCommentScreen,
   ProfileScreen,
+  SearchScreen,
 } from '@/presentation/screens';
 
 export type AppStackParamList = {
@@ -19,6 +20,7 @@ export type AppStackParamList = {
   [Routes.PROFILE]: {
     userId: number;
   };
+  [Routes.SEARCH]: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -34,6 +36,7 @@ export function AppStack() {
       <Stack.Screen name={Routes.SETTINGS} component={SettingsScreen} />
       <Stack.Screen name={Routes.POST_COMMENTS} component={PostCommentScreen} />
       <Stack.Screen name={Routes.PROFILE} component={ProfileScreen} />
+      <Stack.Screen name={Routes.SEARCH} component={SearchScreen} />
     </Stack.Navigator>
   );
 }
