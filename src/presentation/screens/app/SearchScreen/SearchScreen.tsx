@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {Screen} from '@/presentation/components';
+import {Icon, Screen, Text, TextInput} from '@/presentation/components';
 
 export function SearchScreen() {
   return (
-    <Screen>
-      <Text>SearchScreen</Text>
+    <Screen
+      canGoBack
+      HeaderComponent={<TextInput LeftComponent={<Icon name="search" />} />}>
+      <Text>Search</Text>
     </Screen>
   );
 }
