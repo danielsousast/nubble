@@ -10,9 +10,21 @@ export interface UsePaginatedListResult<TData> {
   fetchNextPage: () => void;
   hasNextPage: boolean;
 }
+
+interface Options {
+  /**
+   * Set this to `false` to disable automatic refetching when the query mounts or changes query keys.
+   */
+  enabled?: boolean;
+  /**
+   * The time in milliseconds after data is considered stale.
+   */
+  staleTime?: number;
+}
 export function usePaginatedList<Data>(
   queryKey: readonly unknown[],
   getList: (page: number) => Promise<Response<Data>>,
+  options?: Options,
 ): UsePaginatedListResult<Data> {
   const [list, setList] = useState<Data[]>([]);
 
@@ -27,6 +39,7 @@ export function usePaginatedList<Data>(
         }
         return undefined;
       },
+      ...options,
     });
 
   useEffect(() => {
