@@ -90,9 +90,6 @@ describe('Integration Test - PostCommentScreen', () => {
     );
 
     fireEvent(comment, 'longPress');
-
-    // Log para verificar se o alerta foi chamado
-    console.log('Alerta chamado:', mockedAlert.mock.calls.length > 0);
     expect(mockedAlert).toHaveBeenCalled();
 
     if (mockedConfirm) {

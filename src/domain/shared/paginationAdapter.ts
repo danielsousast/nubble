@@ -1,4 +1,9 @@
-import {MetaDataPage, MetaDataPageAPI} from './paginationTypes';
+import {
+  MetaDataPage,
+  MetaDataPageAPI,
+  Response,
+  ResponseAPI,
+} from './paginationTypes';
 
 function toMetaDataPage(meta: MetaDataPageAPI): MetaDataPage {
   return {
@@ -11,7 +16,16 @@ function toMetaDataPage(meta: MetaDataPageAPI): MetaDataPage {
     hasPreviousPage: !!meta.previous_page_url,
   };
 }
-
+function toPageModel<ApiType, ModelType>(
+  page: ResponseAPI<ApiType>,
+  adapterToModel: (api: ApiType) => ModelType,
+): Response<ModelType> {
+  return {
+    meta: toMetaDataPage(page.meta),
+    data: page.data.map(adapterToModel),
+  };
+}
 export const paginationAdapter = {
   toMetaDataPage,
+  toPageModel,
 };

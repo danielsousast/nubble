@@ -1,17 +1,59 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
+import {Box, BoxProps} from '../Box/Box';
 import {ScreenHeader} from './ScreenHeader';
-import {Box, BoxProps} from '@/presentation/components';
 import {useAppSafeArea, useAppTheme} from '@/presentation/hooks';
 
-interface CoontainerProps {
+export interface ScreenProps extends BoxProps {
+  children: React.ReactNode;
+  HeaderComponent?: React.ReactNode;
+  canGoBack?: boolean;
+  scrollable?: boolean;
+  title?: string;
+  noPaddingHorizontal?: boolean;
+}
+
+export function Screen({
+  children,
+  canGoBack = false,
+  scrollable = false,
+  noPaddingHorizontal = false,
+  style,
+  title,
+  HeaderComponent,
+  ...boxProps
+}: ScreenProps) {
+  const {bottom, top} = useAppSafeArea();
+  const {colors} = useAppTheme();
+
+  const Container = scrollable ? ScrollViewContainer : ViewContainer;
+  return (
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <Container backgroundColor={colors.background}>
+        <Box
+          paddingHorizontal={noPaddingHorizontal ? undefined : 's24'}
+          style={[{paddingTop: top, paddingBottom: bottom}, style]}
+          {...boxProps}>
+          <ScreenHeader
+            paddingHorizontal={noPaddingHorizontal ? 's24' : undefined}
+            HeaderComponent={HeaderComponent}
+            canGoBack={canGoBack}
+            title={title}
+          />
+          {children}
+        </Box>
+      </Container>
+    </KeyboardAvoidingView>
+  );
+}
+
+interface Props {
   children: React.ReactNode;
   backgroundColor: string;
 }
-export function ScrollViewContainer({
-  children,
-  backgroundColor,
-}: CoontainerProps) {
+export function ScrollViewContainer({children, backgroundColor}: Props) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
@@ -21,43 +63,6 @@ export function ScrollViewContainer({
   );
 }
 
-export function ViewContainer({children, backgroundColor}: CoontainerProps) {
-  return <View style={{flex: 1, backgroundColor}}>{children}</View>;
-}
-
-export interface ScreenProps extends BoxProps {
-  children: React.ReactNode;
-  canGoBack?: boolean;
-  scrollable?: boolean;
-  title?: string;
-}
-
-export function Screen({
-  children,
-  canGoBack = false,
-  scrollable = false,
-  style,
-  title,
-  ...boxProps
-}: ScreenProps) {
-  const {bottom, top} = useAppSafeArea();
-  const {colors} = useAppTheme();
-
-  const Container = scrollable ? ScrollViewContainer : ViewContainer;
-  return (
-    <KeyboardAvoidingView
-      style={{flex: 1, backgroundColor: colors.background}}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <Container backgroundColor={colors.background}>
-        <Box
-          paddingBottom="s24"
-          paddingHorizontal="s24"
-          style={[{paddingTop: top, paddingBottom: bottom}, style]}
-          {...boxProps}>
-          <ScreenHeader canGoBack={canGoBack} title={title} />
-          {children}
-        </Box>
-      </Container>
-    </KeyboardAvoidingView>
-  );
+export function ViewContainer({children, backgroundColor}: Props) {
+  return <View style={{backgroundColor, flex: 1}}>{children}</View>;
 }

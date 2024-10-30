@@ -8,6 +8,10 @@ import {Toast} from '@/presentation/components';
 import {ToastProvider} from '@/presentation/providers';
 import {AuthCredentialsProvider} from '@/presentation/providers/auth/AuthProvider';
 
+if (__DEV__) {
+  require('./src/common/config/ReactotronConfig');
+}
+
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {

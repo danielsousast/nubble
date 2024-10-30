@@ -16,10 +16,10 @@ async function getList(
     post_id,
   });
 
-  return {
-    data: response.data.map(postCommentAdapter.toPostComment),
-    meta: paginationAdapter.toMetaDataPage(response.meta),
-  };
+  return paginationAdapter.toPageModel(
+    response,
+    postCommentAdapter.toPostComment,
+  );
 }
 
 async function create(postId: number, message: string): Promise<PostComment> {
