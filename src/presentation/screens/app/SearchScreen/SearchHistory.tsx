@@ -33,7 +33,9 @@ export default function SearchHistory() {
         keyExtractor={item => item.username}
         renderItem={renderItem}
         ListHeaderComponent={
-          <Text preset="headingMedium">Buscas Recentes</Text>
+          <Text preset="headingMedium" mb="s16">
+            Buscas Recentes
+          </Text>
         }
       />
     </Box>

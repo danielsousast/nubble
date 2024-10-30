@@ -25,13 +25,18 @@ export type AppStackParamList = {
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
-export function AppStack() {
+interface Props {
+  initialRouteName?: keyof AppStackParamList;
+}
+
+export function AppStack({initialRouteName = Routes.APP_TAB}: Props) {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         fullScreenGestureEnabled: true,
-      }}>
+      }}
+      initialRouteName={initialRouteName}>
       <Stack.Screen name={Routes.APP_TAB} component={AppTabNavigator} />
       <Stack.Screen name={Routes.SETTINGS} component={SettingsScreen} />
       <Stack.Screen name={Routes.POST_COMMENTS} component={PostCommentScreen} />

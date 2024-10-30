@@ -1,5 +1,4 @@
 import React from 'react';
-import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Routes} from '@/main/navigator';
 import {
@@ -7,6 +6,7 @@ import {
   ProfileAvatar,
   ProfileAvatarProps,
   Text,
+  TouchableBox,
 } from '@/presentation/components';
 
 type Props = {
@@ -35,14 +35,17 @@ export function UserItem({
   }
 
   return (
-    <Pressable onPress={handleOnPress}>
-      <Box flexDirection="row" alignItems="center" mb="s16">
+    <TouchableBox
+      onPress={handleOnPress}
+      flexDirection="row"
+      alignItems="center">
+      <Box flexDirection="row" alignItems="center" mb="s16" flex={1}>
         <ProfileAvatar {...avatarProps} imageURL={profileURL} />
         <Text ml="s12" semiBold preset="paragraphMedium">
           {name}
         </Text>
       </Box>
       {RightComponent}
-    </Pressable>
+    </TouchableBox>
   );
 }

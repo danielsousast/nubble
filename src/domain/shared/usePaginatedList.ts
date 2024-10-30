@@ -20,6 +20,7 @@ interface Options {
    * The time in milliseconds after data is considered stale.
    */
   staleTime?: number;
+  refetchOnMount?: any;
 }
 export function usePaginatedList<Data>(
   queryKey: readonly unknown[],
@@ -39,6 +40,7 @@ export function usePaginatedList<Data>(
         }
         return undefined;
       },
+      refetchOnMount: 'always',
       ...options,
     });
 

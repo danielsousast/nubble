@@ -38,9 +38,10 @@ export function SearchScreen() {
           onChangeText={setSearch}
           value={search}
           LeftComponent={<Icon name="search" />}
+          placeholder="Pesquise por um usuário"
         />
       }>
-      {list?.length === 0 ? (
+      {search?.length === 0 ? (
         <SearchHistory />
       ) : (
         <FlatList
